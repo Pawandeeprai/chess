@@ -5,25 +5,31 @@ class Board
   SIZE = 8
   def initialize
     @grid = Array.new(SIZE){Array.new(SIZE){NullPiece.new}}
+    populate
+  end
+
+  def populate
+    set_piece([0,0],Knight.new([0,0],'blue',self))
   end
 
   def [](row, col)
     @grid[row][col]
   end
 
-  def []=(row, col, piece)
-    @grid[row][col] = piece
+  # def []=(pos, piece)
+  #   @grid[pos[0]][pos[1]] = piece
+  # end
+
+  def set_piece(pos,piece)
+    @grid[pos[0]][pos[1]] = piece
+  end
+  def won?
+    false
   end
 
-  def full?
-    @grid.all? do |row|
-      row.all? { |piece| piece.present? }
-    end
-  end
-
-  def mark(pos)
+  def select_piece(pos)
     x, y = pos
-    @grid[x][y] = Piece.new
+    self[x,y].valid_moves
   end
 
   def in_bounds?(pos)

@@ -8,6 +8,7 @@ class Player
   def move
     result = nil
     until result
+      # sleep(1)
       @display.render
       result = @display.get_input
     end

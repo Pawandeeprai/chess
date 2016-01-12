@@ -1,16 +1,17 @@
 class Piece
-attr_reader  :position
-  def initialize(pos, color)
+attr_reader  :position , :color
+  def initialize(pos, color, board)
     @position = pos
     @color = color
+    @board = board
+  end
+
+  def correct_player?(player_color)
+    @color == player_color
   end
 
   def present?
     true
-  end
-
-  def to_s
-    " x "
   end
 
   def valid_move?(pos)

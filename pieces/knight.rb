@@ -11,6 +11,10 @@ class Knight < Piece
   [ 2,  1]
 ]
 
+  def to_s
+    "♘ "
+  end
+
   def valid_moves
     valid_moves = []
     cur_row, cur_col = self.position

@@ -10,9 +10,14 @@ class Chess
   def play
     puts "Mark all the spaces on the board!"
     puts "WASD or arrow keys to move the cursor, enter or space to confirm."
-    until @board.full?
-      pos = @player.move
-      @board.mark(pos)
+    until @board.won?
+      origin = @player.move
+      valid_moves = @board.select_piece(origin)
+      destination = @player.move
+      if valid_moves.include?(destination)
+        @board.set_piece(destination,Knight.new(destination,'blue',@board))
+        @board.set_piece(origin,NullPiece.new)
+      end
     end
     puts "Hooray, the board is filled!"
   end
