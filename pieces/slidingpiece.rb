@@ -1,3 +1,4 @@
+require_relative 'slidables.rb'
 class SlidingPiece < Piece
-  require Slidables
+  include Slidables
 end

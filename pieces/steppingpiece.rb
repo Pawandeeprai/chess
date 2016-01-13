@@ -1,3 +1,4 @@
+require_relative 'steppables.rb'
 class SteppingPiece < Piece
-  require Steppables
+  include Steppables
 end

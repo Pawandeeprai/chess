@@ -43,7 +43,7 @@ class MemoryGame
 
     compare_guess(pos)
 
-    sleep(1)
+    #sleep(1)
     board.render
   end
 

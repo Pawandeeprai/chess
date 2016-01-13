@@ -1,4 +1,4 @@
-class Knight < Piece
+class Knight < SteppingPiece
 
   MOVES = [
   [-2, -1],
@@ -15,15 +15,23 @@ class Knight < Piece
     "♘ "
   end
 
-  def valid_moves
-    valid_moves = []
-    cur_row, cur_col = self.position
+  # def valid_moves
+  #   valid_moves = []
+  #   cur_row, cur_col = self.position
+  #
+  #   MOVES.each do |drow, dcol|
+  #     new_pos = [cur_row + drow, cur_col + dcol]
+  #     valid_moves << new_pos if new_pos.all? {|el| el.between?(0, 7)}
+  #   end
+  #   valid_moves
+  # end
 
-    MOVES.each do |drow, dcol|
-      new_pos = [cur_row + drow, cur_col + dcol]
-      valid_moves << new_pos if new_pos.all? {|el| el.between?(0, 7)}
-    end
-    valid_moves
+  def valid_forced
+    forced_moves(MOVES)
+  end
+
+  def valid_moves
+    step_valid(MOVES)
   end
 
 end
