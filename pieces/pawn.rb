@@ -1,5 +1,5 @@
 class Pawn < SteppingPiece
-  MOVES = [[0,1],[0,-1],[0,2],[0,-2]]
+  MOVES = [[1,0],[-1,0],[2,0],[-2,0]]
 
   def to_s
     "♙ "
@@ -8,21 +8,20 @@ class Pawn < SteppingPiece
   def validate_moveset(default)
     moves = default.dup
     if self.color == 'white'
-      moves.select! { |move| move[1] > 0 }
+      moves.select! { |move| move[0] < 0 }
     else
-      moves.select! { |move| move[1] < 0 }
+      moves.select! { |move| move[0] > 0 }
     end
     moves
   end
 
   def check_num_moves(moves)
     if @color == 'black' && @position[0] != 1
-      moves.select { |move| move[1] < 2 }
+      moves.select { |move| move[0] < 2 }
     elsif @color == 'white' && @position[0] != 6
-      moves.select { |move| move[1] > -2 }
-    else
-      moves
+      moves.select { |move| move[0] > -2 }
     end
+    moves
   end
 
   def attack_moves
@@ -39,15 +38,9 @@ class Pawn < SteppingPiece
   end
 
   def valid_moves
-    puts "Pawn Moves : #{MOVES}"
     moves = validate_moveset(MOVES)
-    puts "Validate_moveset : #{moves}"
     moves = check_num_moves(moves)
-    puts "Check_num_moves : #{moves}"
-    puts "step_valid called with: #{moves+attack_moves}"
     moves = step_valid(moves + attack_moves)
-    puts "Final Moves: #{moves}"
-    sleep(5)
     moves
   end
 

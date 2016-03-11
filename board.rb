@@ -99,8 +99,6 @@ class Board
     cpy = Board.new(true)
     @grid.each_with_index do |row, rowIdx|
       row.each_with_index do |piece, colIdx|
-        # debugger
-        #puts "Deep duping #{piece.position} #{piece.class}"
         cpy.set_piece([rowIdx,colIdx], piece.piece_dup(cpy)) unless piece.class == NullPiece
       end
     end
