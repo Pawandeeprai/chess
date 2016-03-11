@@ -1,7 +1,7 @@
 require_relative 'pieces'
 require 'byebug'
 class Board
-
+  attr_accessor :grid
   SIZE = 8
   def initialize(cpy = false)
     @grid = Array.new(SIZE){Array.new(SIZE){NullPiece.new}}
@@ -64,6 +64,21 @@ class Board
       end
     end
     false
+  end
+
+
+  def checkmate?(color)
+    if check?(color)
+      pieces = @grid.flatten
+      pieces.select { |p| p.color == color }.all? do |piece|
+        unless piece.valid_moves.empty?
+          return false
+        end
+      end
+      return true
+    else
+      return false
+    end
   end
 
   def [](pos)

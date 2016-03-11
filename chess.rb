@@ -17,10 +17,11 @@ class Chess
       if valid_moves.include?(destination)
         @board.set_piece(destination, @board[origin])
         @board.set_piece(origin, NullPiece.new)
-
       end
+      @player.toggle_color
+      @board.checkmate?(@player.color)
     end
-    puts "Hooray, the board is filled!"
+    puts "Hooray, #{@player.color} wins!"
   end
 end
 

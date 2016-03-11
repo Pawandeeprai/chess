@@ -55,12 +55,10 @@ module Slidables
     moves.each_with_index do |axis,axis_index|
       stop_idx = axis.length-1
       axis.each_with_index do |pos, idx|
-        if idx <= stop_idx
-          if @board[pos].color == @color
-            stop_idx = idx-1
-          elsif @board[pos].color != nil
-            stop_idx = idx
-          end
+        if @board[pos].color == @color
+          stop_idx = idx-1
+        elsif @board[pos].color != nil
+          stop_idx = idx
         end
       end
       filtered_moves << axis[0..stop_idx] unless stop_idx == -1
